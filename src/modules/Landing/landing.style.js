@@ -40,15 +40,16 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
   },
   content: {
-    flexGrow: 1,
+    // flexGrow: 1,
+    background: "rgb(230, 243, 255, 0.2)",
     // padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    // margin: 0
+    margin: "0px 1rem",
     // marginRight: -drawerWidth,
-    width: "100%"
+    width: "100%",
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -56,12 +57,50 @@ export const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginRight: 0,
-    width: "90%"
+    width: "90%",
   },
   sideList: {
-    listStyleType:"none"
+    listStyleType: "none",
   },
   blogContent: {
-    margin: 20
+    margin: 20,
+  },
+  leftSidePanel: {
+    marginTop: 20,
+  },
+  navLink: {
+    textDecoration: "none",
+    "&:hover": {
+      color: "red",
+    },
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  selectOption: {
+    "& .MuiOutlinedInput-input": {
+      padding: "10px",
+    },
+  },
+  avatar: {
+    height: 14,
+  },
+  plr5: {
+    paddingLeft: 5,
+    paddingRight: 5,
+  },
+  pr5: {
+    paddingRight: 5,
+  },
+  postImage:{
+    maxHeight: "65px",
+    objectFit: "cover"
+  },
+  postCard:{
+    marginBottom: "5px"
   }
 }));

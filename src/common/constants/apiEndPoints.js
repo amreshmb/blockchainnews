@@ -1,6 +1,8 @@
 export const ApiEndpointsNamedConstants = {  };
 
-export const ApiEndpoints = {}
+export const ApiEndpoints = {
+    GET_RANKED_POST: 'bridge.get_ranked_posts'
+}
 export const getApiEndPointWithParams = (apiEndPoint, parameters) => {
     const result = [];
     for (const key in parameters) {

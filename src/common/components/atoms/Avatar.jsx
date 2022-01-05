@@ -8,8 +8,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#FFF",
       border: "1px solid #000",
       fontSize: 16,
-      height: 40,
-      width: 40,
+      height: 24,
+      width: 24,
       "& .MuiSvgIcon-root": {
         fill:"unset"
       }
