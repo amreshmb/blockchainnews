@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+
 // import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import reportWebVitals from "./reportWebVitals";
+// import reportWebVitals from "./reportWebVitals";
 import ThemeWrapper from "./ThemeWrapper";
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
@@ -26,4 +27,4 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
 
 // serviceWorkerRegistration.register();
 
-reportWebVitals();
+// reportWebVitals();

@@ -34,12 +34,11 @@ function Header() {
   const handleDrawerClose = () => {
     setState({ ...state, open: false });
   };
-  const getFilterPost = (path) =>{
+  const getFilterPost = (path) => {
     history.push({
-      pathname: ROUTES.LANDING,
-      search: `?sortBy=${path}`,
+      pathname: `${ROUTES.LANDING}/${path}`,
     });
-  }
+  };
   return (
     <>
       <AppBar
@@ -52,9 +51,15 @@ function Header() {
           <WorthiumLogo />
           <Box display="flex" alignItems="center">
             <Box>
-              <Button color="inherit" onClick={()=>getFilterPost('trending')} >Trending</Button>
-              <Button color="inherit" onClick={()=>getFilterPost('created')}>New</Button>
-              <Button color="inherit" onClick={()=>getFilterPost('hot')}>Hot</Button>
+              <Button color="inherit" onClick={() => getFilterPost("trending")}>
+                Trending
+              </Button>
+              <Button color="inherit" onClick={() => getFilterPost("created")}>
+                New
+              </Button>
+              <Button color="inherit" onClick={() => getFilterPost("hot")}>
+                Hot
+              </Button>
             </Box>
             <SearchBar
               value={state.searchVal}
@@ -108,23 +113,27 @@ function Header() {
               path: "/faq",
             },
             {
-              text: "Terms & Condition",
+              text: "Privacy Policy",
+              path: "/privacy",
+            },
+            {
+              text: "Terms of Service",
               path: "/tnc",
             },
-            {
-              text: "download",
-              path: "/download",
-            },
-            {
-              text: "redirect",
-              path: "/redirect",
-            },
-            {
-              text: "share",
-              path: "/share",
-            },
+            // {
+            //   text: "download",
+            //   path: "/download",
+            // },
+            // {
+            //   text: "redirect",
+            //   path: "/redirect",
+            // },
+            // {
+            //   text: "share",
+            //   path: "/share",
+            // },
           ].map((item, index) => (
-            <ListItem button key={item.text}>
+            <ListItem key={item.text}>
               <ListItemText>
                 <Link className={classes.navLink} to={item.path}>
                   {item.text}{" "}

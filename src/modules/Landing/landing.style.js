@@ -40,15 +40,11 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
   },
   content: {
-    // flexGrow: 1,
-    background: "rgb(230, 243, 255, 0.2)",
-    // padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     margin: "0px 1rem",
-    // marginRight: -drawerWidth,
     width: "100%",
   },
   contentShift: {
@@ -61,6 +57,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   sideList: {
     listStyleType: "none",
+    paddingInlineStart: "0px"
   },
   blogContent: {
     margin: 20,
@@ -96,11 +93,23 @@ export const useStyles = makeStyles((theme) => ({
   pr5: {
     paddingRight: 5,
   },
-  postImage:{
+  postImage: {
     maxHeight: "65px",
-    objectFit: "cover"
+    objectFit: "cover",
   },
-  postCard:{
-    marginBottom: "5px"
+  postCard: {
+    marginBottom: "12px",
+  },
+  cardContent: {
+    lineHeight: "1.5em",
+    height: "3em",
+    overflow: "hidden",
+  },
+  cardDescription:{
+    cursor: "pointer"
+  },
+  unModerated:{
+    color: "gray",
+    fontSize: "12px"
   }
 }));

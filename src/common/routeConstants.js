@@ -1,7 +1,11 @@
 const ROUTES = {
-  LANDING: "/",
+  MAIN: "/",
+  LANDING: "/home",
   FAQ: "/faq",
-  WELCOME: "/welcome"
+  WELCOME: "/welcome",
+  USER: "/user",
+  TNC: "/tnc",
+  PRIVACY: "/privacy"
 };
 
 export default ROUTES;
