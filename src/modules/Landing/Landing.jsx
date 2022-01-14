@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useStyles } from "./landing.style";
 import { AtomAvatar, AtomCard, NoResultFound } from "../../common/components";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
+import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
+import MenuItem from '@material-ui/core/MenuItem';
 import Header from "../../common/components/header/Header";
 import {
   newsFilterOption,
@@ -26,6 +29,11 @@ const Landing = (props) => {
     loader: false,
     tag: tag ? tag : "",
   });
+  // const [age, setAge] = React.useState('');
+
+  // const handleChange = (event) => {
+  //   setAge(event.target.value);
+  // };
   console.log('tag', tag)
   useEffect(() => {
     const filterItem = newsFilterOption.filter((item) => item.path === sortBy);
@@ -187,6 +195,7 @@ const Landing = (props) => {
                             />
                           </Box>
                         )}
+                       
                         <Box
                           display="flex"
                           flexDirection="column"
@@ -203,9 +212,43 @@ const Landing = (props) => {
                           >
                             {item.body}
                           </Typography>
+                          <hr style={{width:'100%'}}/>
+                          <Box className={classes.icon_container}>
+                <Box className={classes.icons}>
+                <ExpandLessRoundedIcon />
+                <ExpandMoreRoundedIcon/>
+                <span>$7896
+                {/* <FormControl variant="filled" className={classes.formControl}> */}
+        {/* <InputLabel id="demo-simple-select-filled-label">Age</InputLabel> */}
+        <Select
+          // labelId="demo-simple-select-filled-label"
+          // id="demo-simple-select-filled"
+          // value={age}
+          // onChange={handleChange}
+        >
+          <MenuItem value="">
+            {/* <em>None</em> */}
+          </MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      {/* </FormControl> */}
+                </span>
+                <Box className={classes.vertical}></Box>
+                </Box>
+                <Box className={classes.numbers}>
+                <span style={{marginLeft:'0.5rem'}}>num1 <box  className={classes.vertical}></box></span>
+                <span style={{marginLeft:'0.5rem'}}>num2 <box  className={classes.vertical}></box></span>
+                <span style={{marginLeft:'0.5rem'}}>num3</span>
+                </Box>
+
+              </Box>
                         </Box>
                       </Box>
+                     
                     </AtomCard>
+                    
                   );
                 })
               ) : (
