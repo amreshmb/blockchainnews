@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useStyles } from "./landing.style";
 import { AtomAvatar, AtomCard, NoResultFound } from "../../common/components";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
-import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
-import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
-import MenuItem from '@material-ui/core/MenuItem';
+import ExpandLessRoundedIcon from "@material-ui/icons/ExpandLessRounded";
+import ExpandMoreRoundedIcon from "@material-ui/icons/ExpandMoreRounded";
 import Header from "../../common/components/header/Header";
 import {
   newsFilterOption,
@@ -34,7 +33,6 @@ const Landing = (props) => {
   // const handleChange = (event) => {
   //   setAge(event.target.value);
   // };
-  console.log('tag', tag)
   useEffect(() => {
     const filterItem = newsFilterOption.filter((item) => item.path === sortBy);
     if (filterItem.length) {
@@ -106,8 +104,14 @@ const Landing = (props) => {
                 alignItems="center"
               >
                 <Box>
-                  <Typography variant="h4">{tag ? `#${tag}` : 'All News'}</Typography>
-                  {tag? <Typography className={classes.unModerated} >Unmoderated tag</Typography>: null}
+                  <Typography variant="h4">
+                    {tag ? `#${tag}` : "All News"}
+                  </Typography>
+                  {tag ? (
+                    <Typography className={classes.unModerated}>
+                      Unmoderated tag
+                    </Typography>
+                  ) : null}
                 </Box>
                 <Box>
                   <FormControl
@@ -185,7 +189,11 @@ const Landing = (props) => {
                           {moment(item.created).fromNow()}
                         </Link>
                       </Box>
-                      <Box display="flex" alignItems="center" className={classes.cardDescription} >
+                      <Box
+                        display="flex"
+                        alignItems="center"
+                        className={classes.cardDescription}
+                      >
                         {item.json_metadata && item.json_metadata.image && (
                           <Box paddingRight="12px">
                             <img
@@ -195,7 +203,7 @@ const Landing = (props) => {
                             />
                           </Box>
                         )}
-                       
+
                         <Box
                           display="flex"
                           flexDirection="column"
@@ -212,43 +220,39 @@ const Landing = (props) => {
                           >
                             {item.body}
                           </Typography>
-                          <hr style={{width:'100%'}}/>
+                          <hr style={{ width: "100%" }} />
                           <Box className={classes.icon_container}>
-                <Box className={classes.icons}>
-                <ExpandLessRoundedIcon />
-                <ExpandMoreRoundedIcon/>
-                <span>$7896
-                {/* <FormControl variant="filled" className={classes.formControl}> */}
-        {/* <InputLabel id="demo-simple-select-filled-label">Age</InputLabel> */}
-        <Select
-          // labelId="demo-simple-select-filled-label"
-          // id="demo-simple-select-filled"
-          // value={age}
-          // onChange={handleChange}
-        >
-          <MenuItem value="">
-            {/* <em>None</em> */}
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      {/* </FormControl> */}
-                </span>
-                <Box className={classes.vertical}></Box>
-                </Box>
-                <Box className={classes.numbers}>
-                <span style={{marginLeft:'0.5rem'}}>num1 <box  className={classes.vertical}></box></span>
-                <span style={{marginLeft:'0.5rem'}}>num2 <box  className={classes.vertical}></box></span>
-                <span style={{marginLeft:'0.5rem'}}>num3</span>
-                </Box>
-
-              </Box>
+                            <Box className={classes.icons}>
+                              <ExpandLessRoundedIcon />
+                              <ExpandMoreRoundedIcon />
+                              <span>
+                                $7896
+                                <Select
+                                >
+                                 <Box>
+                                    <ul>
+                                      <li></li>
+                                      <li></li>
+                                      <li></li>
+                                    </ul>
+                                 </Box>
+                                </Select>
+                              </span>
+                              <Box className={classes.vertical}></Box>
+                            </Box>
+                            <Box className={classes.numbers}>
+                              <span style={{ marginLeft: "0.5rem" }}>
+                                num1 <Box className={classes.vertical}></Box>
+                              </span>
+                              <span style={{ marginLeft: "0.5rem" }}>
+                                num2 <Box className={classes.vertical}></Box>
+                              </span>
+                              <span style={{ marginLeft: "0.5rem" }}>num3</span>
+                            </Box>
+                          </Box>
                         </Box>
                       </Box>
-                     
                     </AtomCard>
-                    
                   );
                 })
               ) : (

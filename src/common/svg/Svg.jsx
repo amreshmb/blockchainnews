@@ -49,3 +49,4 @@ export const WorthiumLogo = (props) => {
     </svg>
   );
 };
+
