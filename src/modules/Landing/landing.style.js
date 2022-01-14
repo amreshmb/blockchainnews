@@ -111,5 +111,28 @@ export const useStyles = makeStyles((theme) => ({
   unModerated:{
     color: "gray",
     fontSize: "12px"
+  },
+  card_container:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start"
+
+  },
+  card_content:{
+    display: "flex",
+    alignItems: "center"
+  },
+  icon_container:{
+    display: "flex",
+    alignItems: "center"
+  },
+  icons:{
+    display: "flex",
+    alignItems: "center"
+  },
+  vertical:{
+    height:"25px",
+     borderLeft:"1px solid Silver",
+     marginLeft:'1rem' 
   }
 }));

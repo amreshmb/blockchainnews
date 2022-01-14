@@ -4,7 +4,7 @@ import { AtomAvatar } from '../../common/components';
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import Header from '../../common/components/header/Header';
 import { useStyles } from './user.style';
-import { AppBar, Box, Button, Tab, Tabs } from '@material-ui/core';
+import { AppBar, Box, Button,} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 function User() {
