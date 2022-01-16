@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { AtomAvatar } from "../../common/components";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import Header from "../../common/components/header/Header";
@@ -17,7 +17,7 @@ function a11yProps(index) {
 
 function User() {
   const classes = useStyles();
-  const history = useHistory();
+  // const history = useHistory();
   const [tabValue, setTabValue] = useState(0);
   const handleChange = (event, newValue) => {
     setTabValue(newValue);

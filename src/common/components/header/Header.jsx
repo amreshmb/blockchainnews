@@ -120,6 +120,18 @@ function Header() {
               text: "Terms of Service",
               path: "/tnc",
             },
+            {
+              text: "Stolen Accounts Recovery",
+              externalLink: "http://wortheumwallet.com/recover_account_step_1"
+            },
+            {
+              text: "Change Account Password",
+              externalLink: "http://wortheumwallet.com/change_password"
+            },
+            {
+              text: "Vote for Witnesses",
+              externalLink: "http://wortheumwallet.com/~witnesses"
+            },
             // {
             //   text: "download",
             //   path: "/download",
@@ -135,9 +147,16 @@ function Header() {
           ].map((item, index) => (
             <ListItem key={item.text}>
               <ListItemText>
-                <Link className={classes.navLink} to={item.path}>
+                {item.path && <Link className={classes.navLink} to={item.path}>
                   {item.text}{" "}
-                </Link>
+                </Link>}
+                {item.externalLink && <Link className={classes.navLink} to="#" target="_blank" onClick={(e)=>{
+                  e.preventDefault();
+                  window.open(`${item.externalLink}`, "_blank" )
+                }}>
+                  {item.text}{" "}
+                </Link>}
+
               </ListItemText>
             </ListItem>
           ))}

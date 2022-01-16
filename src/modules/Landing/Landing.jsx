@@ -1,10 +1,12 @@
 import { Box, FormControl, Grid, Select, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useStyles } from "./landing.style";
-import { AtomAvatar, AtomCard, NoResultFound } from "../../common/components";
-import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
-import ExpandLessRoundedIcon from "@material-ui/icons/ExpandLessRounded";
-import ExpandMoreRoundedIcon from "@material-ui/icons/ExpandMoreRounded";
+import {
+  ArticleCard,
+  AtomAvatar,
+  AtomCard,
+  NoResultFound,
+} from "../../common/components";
 import Header from "../../common/components/header/Header";
 import {
   newsFilterOption,
@@ -15,7 +17,6 @@ import { Link, useHistory } from "react-router-dom";
 import ROUTES from "../../common/routeConstants";
 import { getRankedPost } from "../../common/service";
 import { useParams } from "react-router-dom";
-import moment from "moment";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Landing = (props) => {
@@ -146,113 +147,22 @@ const Landing = (props) => {
               {state.data.length > 0 ? (
                 state.data.map((item) => {
                   return (
-                    <AtomCard key={item.post_id} className={classes.postCard}>
-                      <Box display="flex" paddingBottom="5px">
-                        <AtomAvatar
-                          avatarLabel={
-                            <PersonOutlineIcon className={classes.avatar} />
-                          }
-                        />
-                        <strong className={classes.plr5}>
-                          <Link
-                            className={classes.navLink}
-                            to={`${ROUTES.USER}/:@${item.author}`}
-                          >
-                            {" "}
-                            {item.author}
-                          </Link>
-                        </strong>
-                        <span className={classes.pr5}>
-                          ({item.author_reputation})
-                        </span>
-                        <span className={classes.pr5}>in</span>
-                        {item.json_metadata &&
-                          item.json_metadata.tags &&
-                          item.json_metadata.tags.length > 0 && (
-                            <Link
-                              className={classes.navLink}
-                              to="/"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                history.push({
-                                  pathname: `${ROUTES.LANDING}/${
-                                    filterPath[state.filter]
-                                  }/${item.json_metadata.tags[0]}`,
-                                });
-                              }}
-                            >
-                              #{item.json_metadata.tags[0]}
-                            </Link>
-                          )}
-                        <span className={classes.plr5}> • </span>
-                        <Link className={classes.navLink} to="/">
-                          {moment(item.created).fromNow()}
-                        </Link>
-                      </Box>
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                        className={classes.cardDescription}
-                      >
-                        {item.json_metadata && item.json_metadata.image && (
-                          <Box paddingRight="12px">
-                            <img
-                              className={classes.postImage}
-                              src={item.json_metadata.image[0]}
-                              alt="profile"
-                            />
-                          </Box>
-                        )}
-
-                        <Box
-                          display="flex"
-                          flexDirection="column"
-                          onClick={() => {
-                            history.push({
-                              pathname: item.url,
-                            });
-                          }}
-                        >
-                          <Typography variant="h4">{item.title}</Typography>
-                          <Typography
-                            className={classes.cardContent}
-                            color="textSecondary"
-                          >
-                            {item.body}
-                          </Typography>
-                          <hr style={{ width: "100%" }} />
-                          <Box className={classes.icon_container}>
-                            <Box className={classes.icons}>
-                              <ExpandLessRoundedIcon />
-                              <ExpandMoreRoundedIcon />
-                              <span>
-                                $7896
-                                <Select
-                                >
-                                 <Box>
-                                    <ul>
-                                      <li></li>
-                                      <li></li>
-                                      <li></li>
-                                    </ul>
-                                 </Box>
-                                </Select>
-                              </span>
-                              <Box className={classes.vertical}></Box>
-                            </Box>
-                            <Box className={classes.numbers}>
-                              <span style={{ marginLeft: "0.5rem" }}>
-                                num1 <Box className={classes.vertical}></Box>
-                              </span>
-                              <span style={{ marginLeft: "0.5rem" }}>
-                                num2 <Box className={classes.vertical}></Box>
-                              </span>
-                              <span style={{ marginLeft: "0.5rem" }}>num3</span>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </AtomCard>
+                    <Box key={item.post_id}>
+                      <ArticleCard
+                        author={item.author}
+                        author_reputation={item.author_reputation}
+                        created={item.created}
+                        filter={state.filter}
+                        json_metadata={item.json_metadata}
+                        title={item.title}
+                        body={item.body}
+                        postUrl={item.url}
+                        totalVote={item.stats.total_votes}
+                        messages={item.children}
+                        payout={item.payout}
+                        payoutAt={item.payout_at}
+                      />
+                    </Box>
                   );
                 })
               ) : (
