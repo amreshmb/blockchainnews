@@ -30,7 +30,9 @@ function Header() {
   const requestSearch = (searchedVal) => {
     setState({ ...state, searchVal: searchedVal });
   };
-  const cancelSearch = () => {};
+  const cancelSearch = () => {
+    setState({ ...state, searchVal: "" });
+  };
   const handleDrawerClose = () => {
     setState({ ...state, open: false });
   };
@@ -39,6 +41,7 @@ function Header() {
       pathname: `${ROUTES.LANDING}/${path}`,
     });
   };
+  
   return (
     <>
       <AppBar
@@ -65,7 +68,12 @@ function Header() {
               value={state.searchVal}
               onChange={(searchVal) => requestSearch(searchVal)}
               onCancelSearch={cancelSearch}
-            />
+              onRequestSearch={()=>{
+                history.push({
+                  pathname: ROUTES.SEARCH,
+                  search: `?q=${state.searchVal}&s=newest` 
+,                })
+              }} />
             <Button color="inherit">Login</Button>
             {!state.open && (
               <IconButton

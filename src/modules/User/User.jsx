@@ -149,7 +149,7 @@ function User() {
             <Blogs />
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
-        <SubPosts/>
+            <SubPosts />
         </TabPanel>
         <TabPanel value={tabValue} index={2}>
           Item Three

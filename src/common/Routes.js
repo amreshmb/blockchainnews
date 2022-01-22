@@ -1,5 +1,5 @@
 import ROUTES from "./routeConstants";
-import { Main, Landing, Faq, Welcome, User, TermsOfService, PrivacyPolicy, PostDetail, About } from "./../modules";
+import { Main, Landing, Faq, Welcome, User, TermsOfService, PrivacyPolicy, PostDetail, About, Search } from "./../modules";
 
 const Routes = {
   MAIN: { path: `${ROUTES.MAIN}`, protected: false, component: Main },
@@ -13,6 +13,7 @@ const Routes = {
   PRIVACY: { path: `${ROUTES.PRIVACY}`, protected: false, component: PrivacyPolicy },
   NEWS: { path: `${ROUTES.NEWS}/:authorName/:postTitle`, protected: false, component: PostDetail },
   ABOUT: { path: `${ROUTES.ABOUT}`, protected: false, component: About },
+  SEARCH: { path: `${ROUTES.SEARCH}`, protected: false, component: Search },
 };
 
 export default Routes;

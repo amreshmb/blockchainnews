@@ -6,3 +6,6 @@ const API_VERSION = {"jsonrpc":"2.0"}
 export const getRankedPost = (params)=>{
     return HttpMethod.post(ROUTE_PATH,{...API_VERSION, method:ApiEndpoints.GET_RANKED_POST, ...params } )
 }
+export const getAccountPost = (params)=>{
+    return HttpMethod.post(ROUTE_PATH,{...API_VERSION, method:ApiEndpoints.GET_ACCOUNT_POST, ...params } )
+}

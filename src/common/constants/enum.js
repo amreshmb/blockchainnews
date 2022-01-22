@@ -59,3 +59,18 @@ export const tagOptions = [
     path: "food",
   },
 ];
+
+export const filterSearchOption = [
+  {
+    name: "Newest",
+    path: "newest",
+  },
+  {
+    name: "Popularity",
+    path: "popularity",
+  },
+  {
+    name: "Relevance",
+    path: "relevance",
+  },
+];

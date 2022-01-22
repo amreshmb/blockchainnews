@@ -1,28 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { useStyles } from "./subPosts.style";
 import { Box, Container, Tab, Tabs } from "@material-ui/core";
 import { TabPanel } from "../../../common/components/atoms";
-import AllPosts from '../AllPosts';
-import Comments from '../Comments';
-import Payouts from '../Payouts';
-
+import AllPosts from "../AllPosts";
+import Comments from "../Comments";
+import Payouts from "../Payouts";
 
 function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      "aria-controls": `simple-tabpanel-${index}`,
-    };
-  }
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
 
 function SubPosts() {
-    const classes = useStyles();
-    const [tabValue, setTabValue] = useState(0);
-    const handleChange = (event, newValue) => {
-      setTabValue(newValue);
-    };
-    return (
-        <div>
-        <Box >
+  const classes = useStyles();
+  const [tabValue, setTabValue] = useState(0);
+  const handleChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
+  return (
+    <div>
+      <Box>
         <Container>
           <Box display="flex" justifyContent="space-between">
             <Tabs
@@ -45,26 +44,23 @@ function SubPosts() {
                 label="Payouts"
                 {...a11yProps(2)}
               />
-            
             </Tabs>
-
           </Box>
         </Container>
       </Box>
       <Container>
         <TabPanel value={tabValue} index={0}>
-            <AllPosts/>
+          <AllPosts />
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
-          <Comments/>
+          <Comments />
         </TabPanel>
         <TabPanel value={tabValue} index={2}>
-          <Payouts/>
+          <Payouts />
         </TabPanel>
-       
       </Container>
-      </div>
-    )
+    </div>
+  );
 }
 
-export default SubPosts
+export default SubPosts;

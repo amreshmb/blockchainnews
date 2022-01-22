@@ -7,7 +7,8 @@ const ROUTES = {
   TNC: "/tnc",
   PRIVACY: "/privacy",
   NEWS: "/news",
-  ABOUT: "/about"
+  ABOUT: "/about",
+  SEARCH: "/search"
 };
 
 export default ROUTES;
