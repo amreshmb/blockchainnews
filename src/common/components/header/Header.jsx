@@ -132,6 +132,14 @@ function Header() {
               text: "Vote for Witnesses",
               externalLink: "http://wortheumwallet.com/~witnesses"
             },
+            {
+              text: "Wortheum Whitepaper",
+              externalLink: "https://wortheum.io/assets/Whitepaper-2.0.pdf"
+            },
+            {
+              text: "About Wortheum",
+              path: "/about"
+            },
             // {
             //   text: "download",
             //   path: "/download",
@@ -156,7 +164,6 @@ function Header() {
                 }}>
                   {item.text}{" "}
                 </Link>}
-
               </ListItemText>
             </ListItem>
           ))}

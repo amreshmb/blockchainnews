@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useStyles } from "./landing.style";
 import {
   ArticleCard,
-  AtomAvatar,
   AtomCard,
   NoResultFound,
 } from "../../common/components";

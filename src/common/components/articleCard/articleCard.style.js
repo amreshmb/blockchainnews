@@ -26,9 +26,6 @@ export const useStyles = makeStyles((theme) => ({
     maxHeight: "100px",
     objectFit: "cover",
   },
-  postCard: {
-    marginBottom: "12px",
-  },
   cardContent: {
     lineHeight: "1.5em",
     height: "3em",

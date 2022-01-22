@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "white",
   },
   background: {
-    background: "red",
+    background: "#171F24",
   },
   vertical: {
     height: "25px",

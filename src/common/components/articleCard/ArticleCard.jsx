@@ -11,7 +11,7 @@ import { useStyles } from "./articleCard.style";
 import ROUTES from "../../routeConstants";
 import { filterPath } from "../../constants/enum";
 import { Link, useHistory } from "react-router-dom";
-import { Box, Select, Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import { AtomAvatar, AtomCard } from "..";
 function ArticleCard({
   author = "",
