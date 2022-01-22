@@ -24,6 +24,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   postImage: {
     maxHeight: "100px",
+    maxWidth: "100px",
     objectFit: "cover",
   },
   cardContent: {

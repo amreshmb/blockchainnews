@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { AtomAvatar } from "../../common/components";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import Header from "../../common/components/header/Header";
@@ -8,6 +8,9 @@ import { Box, Button, Container, Tab, Tabs } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { TabPanel } from "../../common/components/atoms";
 import Blogs from "../Blogs/Blogs"
+import SubPosts from "../Posts/SubPosts/SubPosts";
+import Social from "../Social/Social";
+import Notifications from "../Notifications/Notifications";
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -17,7 +20,7 @@ function a11yProps(index) {
 
 function User() {
   const classes = useStyles();
-  // const history = useHistory();
+  const history = useHistory();
   const [tabValue, setTabValue] = useState(0);
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
@@ -146,16 +149,16 @@ function User() {
             <Blogs />
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
-          Item Three
+        <SubPosts/>
         </TabPanel>
         <TabPanel value={tabValue} index={2}>
           Item Three
         </TabPanel>
         <TabPanel value={tabValue} index={3}>
-          Item Three
+          <Social/>
         </TabPanel>
         <TabPanel value={tabValue} index={4}>
-          Item Three
+          <Notifications/>
         </TabPanel>
       </Container>
     </div>
