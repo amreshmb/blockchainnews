@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { AtomAvatar } from "../../common/components";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import Header from "../../common/components/header/Header";
@@ -7,10 +7,16 @@ import { useStyles } from "./user.style";
 import { Box, Button, Container, Tab, Tabs } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { TabPanel } from "../../common/components/atoms";
-import Blogs from "../Blogs/Blogs"
+import Blogs from "../Blogs/Blogs";
 import SubPosts from "../Posts/SubPosts/SubPosts";
 import Social from "../Social/Social";
 import Notifications from "../Notifications/Notifications";
+import {
+  getAccountInfo,
+  getFollower,
+  getFollowing,
+  getGlobalProerties,
+} from "../../common/service";
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -22,22 +28,104 @@ function User() {
   const classes = useStyles();
   const history = useHistory();
   const [tabValue, setTabValue] = useState(0);
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
+  const [accountInfo, setAccountInfo] = useState(null);
+  const [globalData, setGlobalData] = useState(null);
+  const [loader, setLoader] = useState(false);
+  const { authorName } = useParams();
+
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
   };
+  const getFollowerData = (reqData) => {
+    getFollower(reqData)
+      .then((res) => {
+        if (res.result.length) {
+          setFollowers(res.result);
+        }
+      })
+      .catch((e) => {
+        setLoader(false);
+      });
+  };
+  const getFollowingData = (reqData) => {
+    getFollowing(reqData)
+      .then((res) => {
+        if (res.result.length) {
+          setFollowing(res.result);
+        }
+      })
+      .catch((e) => {
+        setLoader(false);
+      });
+  };
+  const getAccountInfoData = () => {
+    getAccountInfo({
+      id: 1,
+      params: {
+        accounts: [authorName.split("@")[1]],
+      },
+    })
+      .then((res) => {
+        if (res.result && res.result.accounts && res.result.accounts.length) {
+          setAccountInfo(res.result.accounts);
+        }
+      })
+      .catch((e) => {
+        setLoader(false);
+      });
+  };
+  const getGlobalProertiesData = () => {
+    getGlobalProerties({
+      id: 1,
+      params: [],
+    })
+      .then((res) => {
+        if (res.result) {
+          setGlobalData(res.result);
+        }
+      })
+      .catch((e) => {
+        setLoader(false);
+      });
+  };
+  useEffect(() => {
+    if (authorName) {
+      const reqData = {
+        params: [authorName.split("@")[1], "", "blog", 1000],
+        id: 1,
+      };
+      setLoader(true);
+      getFollowerData(reqData);
+      getFollowingData(reqData);
+      getAccountInfoData();
+      getGlobalProertiesData();
+    }
+  }, []);
+  const userData =
+    accountInfo && accountInfo.length > 0
+      ? JSON.parse(accountInfo[0].posting_json_metadata)
+      : null;
+
   return (
     <div>
       <Header />
       <Box className={classes.background}>
-        <Box display="flex" alignItems="center" justifyContent="center">
-          <AtomAvatar
-            className={classes.margin_right}
-            avatarLabel={<PersonOutlineIcon className={classes.avatar} />}
-          />
-          <span className={classes.margin_right}>NoNamesLeftToUse</span>
-          <span className={classes.margin_right}>(76)</span>
-          <span className={classes.margin_right}>icon</span>
-        </Box>
+        {userData && (
+          <Box display="flex" alignItems="center" justifyContent="center">
+            <AtomAvatar
+              className={classes.margin_right}
+              avatarLabel={<PersonOutlineIcon className={classes.avatar} />}
+              imgSrc={userData.profile.profile_image}
+            />
+            <span className={classes.margin_right}>
+              {userData.profile.name}
+            </span>
+            <span className={classes.margin_right}>(76)</span>
+            <span className={classes.margin_right}>icon</span>
+          </Box>
+        )}
         <Box
           display="flex"
           justifyContent="center"
@@ -53,7 +141,7 @@ function User() {
           marginTop="1rem"
         >
           <Link to="/" className={classes.link}>
-            5021 followers
+            {followers.length} followers
           </Link>
           <span className={classes.vertical}></span>
           <Link to="/" className={classes.link}>
@@ -61,7 +149,7 @@ function User() {
           </Link>
           <span className={classes.vertical}></span>
           <Link to="/" className={classes.link}>
-            27405 following
+            {following.length} following
           </Link>
           <span className={classes.vertical}></span>
           <Link to="/" className={classes.link}>
@@ -146,19 +234,19 @@ function User() {
       </Box>
       <Container>
         <TabPanel value={tabValue} index={0}>
-            <Blogs />
+          <Blogs />
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
-            <SubPosts />
+          <SubPosts />
         </TabPanel>
         <TabPanel value={tabValue} index={2}>
           Item Three
         </TabPanel>
         <TabPanel value={tabValue} index={3}>
-          <Social/>
+          <Social />
         </TabPanel>
         <TabPanel value={tabValue} index={4}>
-          <Notifications/>
+          <Notifications />
         </TabPanel>
       </Container>
     </div>

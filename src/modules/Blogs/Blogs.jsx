@@ -11,20 +11,24 @@ function Blogs() {
   });
   const { authorName } = useParams();
   useEffect(() => {
-    const reqData = {
-      params: {
-        sort: "blog",
-        observer: "hive.blog",
-        account: authorName.split("@")[1],
-      },
-      id: 7,
-    };
-    setState({ ...state, loader: true });
-    getAccountPost(reqData).then((res) => {
-      if (res.result) {
-        setState({ ...state, loader: false, data: res.result });
-      }
-    });
+    if(authorName){
+      const reqData = {
+        params: {
+          sort: "blog",
+          observer: "hive.blog",
+          account: authorName.split("@")[1],
+        },
+        id: 7,
+      };
+      setState({ ...state, loader: true });
+      getAccountPost(reqData).then((res) => {
+        if (res.result) {
+          setState({ ...state, loader: false, data: res.result });
+        }
+      }).catch((e) => {
+        setState({ ...state, loader: false });
+      });
+    }
   }, []);
   return (
     <Box margin="1rem 0.5rem">
