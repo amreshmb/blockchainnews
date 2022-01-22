@@ -28,11 +28,6 @@ const Landing = (props) => {
     loader: false,
     tag: tag ? tag : "",
   });
-  // const [age, setAge] = React.useState('');
-
-  // const handleChange = (event) => {
-  //   setAge(event.target.value);
-  // };
   useEffect(() => {
     const filterItem = newsFilterOption.filter((item) => item.path === sortBy);
     if (filterItem.length) {
