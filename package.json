@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@hookform/resolvers": "^2.6.1",
+    "@hookform/resolvers": "^2.8.8",
     "@material-ui/core": "^4.12.1",
     "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.6.0",
+    "@steemit/steem-js": "^0.7.9",
     "axios": "^0.21.1",
     "babel-plugin-root-import": "^6.6.0",
     "clsx": "^1.1.1",
@@ -16,15 +17,17 @@
     "react": "^17.0.2",
     "react-app-rewired": "^2.1.8",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.11.0",
+    "react-hook-form": "^7.25.0",
+    "react-html-parser": "^2.0.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux-logger": "^3.0.6",
+    "remarkable": "^2.0.1",
+    "sanitize-html": "^2.6.1",
     "steem": "^0.7.11",
-    "@steemit/steem-js": "0.7.9",
     "web-vitals": "^0.2.4",
-    "yup": "^0.32.9"
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",

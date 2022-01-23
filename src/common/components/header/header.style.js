@@ -37,4 +37,28 @@ export const useStyles = makeStyles((theme) => ({
   navLink: {
     textDecoration: "none",
   },
+  pencilIcon: {
+    width: 35,
+    height: 35,
+    minWidth: 35,
+    minHeight: 35,
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "#fff",
+    cursor: "pointer",
+    "& .MuiSvgIcon-root": {
+      fill: "gray",
+    },
+    "&:hover": {
+      background: "gray",
+      "& .MuiSvgIcon-root": {
+        fill: "#fff",
+      },
+    },
+  },
+  menuButton: {
+    marginLeft: "0px",
+  },
 }));

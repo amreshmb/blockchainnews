@@ -22,6 +22,7 @@ import clsx from "clsx";
 import MenuIcon from "@material-ui/icons/Menu";
 import ROUTES from "../../routeConstants";
 import { useHistory } from "react-router-dom";
+import EditIcon from '@material-ui/icons/Edit';
 function Header() {
   const classes = useStyles();
   const theme = useTheme();
@@ -41,7 +42,7 @@ function Header() {
       pathname: `${ROUTES.LANDING}/${path}`,
     });
   };
-  
+
   return (
     <>
       <AppBar
@@ -68,13 +69,29 @@ function Header() {
               value={state.searchVal}
               onChange={(searchVal) => requestSearch(searchVal)}
               onCancelSearch={cancelSearch}
-              onRequestSearch={()=>{
+              onRequestSearch={() => {
                 history.push({
                   pathname: ROUTES.SEARCH,
-                  search: `?q=${state.searchVal}&s=newest` 
-,                })
-              }} />
-            <Button color="inherit">Login</Button>
+                  search: `?q=${state.searchVal}&s=newest`,
+                });
+              }}
+            />
+            <Button
+              color="inherit"
+              onClick={() => {
+                history.push(ROUTES.LOGIN);
+              }}
+            >
+              Login
+            </Button>
+            <Button color="inherit" onClick={() => {}}>
+              Sign Up
+            </Button>
+            <Box className={classes.pencilIcon} onClick={()=>{
+              history.push(ROUTES.CREATE_POST);
+            }} >
+              <EditIcon />
+            </Box>
             {!state.open && (
               <IconButton
                 edge="start"
@@ -130,23 +147,23 @@ function Header() {
             },
             {
               text: "Stolen Accounts Recovery",
-              externalLink: "http://wortheumwallet.com/recover_account_step_1"
+              externalLink: "http://wortheumwallet.com/recover_account_step_1",
             },
             {
               text: "Change Account Password",
-              externalLink: "http://wortheumwallet.com/change_password"
+              externalLink: "http://wortheumwallet.com/change_password",
             },
             {
               text: "Vote for Witnesses",
-              externalLink: "http://wortheumwallet.com/~witnesses"
+              externalLink: "http://wortheumwallet.com/~witnesses",
             },
             {
               text: "Wortheum Whitepaper",
-              externalLink: "https://wortheum.io/assets/Whitepaper-2.0.pdf"
+              externalLink: "https://wortheum.io/assets/Whitepaper-2.0.pdf",
             },
             {
               text: "About Wortheum",
-              path: "/about"
+              path: "/about",
             },
             // {
             //   text: "download",
@@ -163,15 +180,24 @@ function Header() {
           ].map((item, index) => (
             <ListItem key={item.text}>
               <ListItemText>
-                {item.path && <Link className={classes.navLink} to={item.path}>
-                  {item.text}{" "}
-                </Link>}
-                {item.externalLink && <Link className={classes.navLink} to="#" target="_blank" onClick={(e)=>{
-                  e.preventDefault();
-                  window.open(`${item.externalLink}`, "_blank" )
-                }}>
-                  {item.text}{" "}
-                </Link>}
+                {item.path && (
+                  <Link className={classes.navLink} to={item.path}>
+                    {item.text}{" "}
+                  </Link>
+                )}
+                {item.externalLink && (
+                  <Link
+                    className={classes.navLink}
+                    to="#"
+                    target="_blank"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.open(`${item.externalLink}`, "_blank");
+                    }}
+                  >
+                    {item.text}{" "}
+                  </Link>
+                )}
               </ListItemText>
             </ListItem>
           ))}

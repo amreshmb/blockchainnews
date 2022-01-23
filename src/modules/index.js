@@ -7,6 +7,8 @@ import TermsOfService from "./TermsOfService/TermsOfService";
 import PrivacyPolicy from "./PrivacyPolicy/PrivacyPolicy";
 import PostDetail from "./PostDetail/PostDetail";
 import About from "./About/About";
-import Search from "./Search/Search"
+import Search from "./Search/Search";
+import Login from "./Login/Login";
+import CreatePost from "./CreatePost/CreatePost";
 
-export { Landing, Faq, Welcome, User, Main,TermsOfService, PrivacyPolicy, PostDetail, About, Search };
+export { Landing, Faq, Welcome, User, Main,TermsOfService, PrivacyPolicy, PostDetail, About, Search, Login, CreatePost };
