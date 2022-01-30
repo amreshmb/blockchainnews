@@ -9,7 +9,8 @@ const ROUTES = {
   NEWS: "/news",
   ABOUT: "/about",
   SEARCH: "/search",
-  LOGIN: "/login"
+  LOGIN: "/login",
+  SIGN: "/sign"
 };
 
 export default ROUTES;

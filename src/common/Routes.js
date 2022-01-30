@@ -10,7 +10,8 @@ import {
   PostDetail,
   About,
   Search,
-  Login
+  Login,
+  Signup
 } from "./../modules";
 
 const Routes = {
@@ -46,7 +47,8 @@ const Routes = {
   },
   ABOUT: { path: `${ROUTES.ABOUT}`, protected: false, component: About },
   SEARCH: { path: `${ROUTES.SEARCH}`, protected: false, component: Search },
-  LOGIN: { path: `${ROUTES.LOGIN}`, protected: false, component: Login }
+  LOGIN: { path: `${ROUTES.LOGIN}`, protected: false, component: Login },
+  SIGNUP: { path: `${ROUTES.SIGN}`, protected: false, component: Signup },
 };
 
 export default Routes;

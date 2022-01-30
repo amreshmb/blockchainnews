@@ -9,6 +9,7 @@ import PostDetail from "./PostDetail/PostDetail";
 import About from "./About/About";
 import Search from "./Search/Search";
 import Login from "./Login/Login";
+import Signup from "./SignUp/Signup";
 import CreatePost from "./CreatePost/CreatePost";
 
-export { Landing, Faq, Welcome, User, Main,TermsOfService, PrivacyPolicy, PostDetail, About, Search, Login, CreatePost };
+export { Landing, Faq, Welcome, User, Main,TermsOfService, PrivacyPolicy, PostDetail, About, Search, Login, CreatePost, Signup };
