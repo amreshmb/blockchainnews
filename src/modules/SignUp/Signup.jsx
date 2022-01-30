@@ -14,9 +14,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import _debounce from "lodash/debounce";
 const dsteem = require("dsteem");
-const client = new dsteem.Client("http://143.198.180.171:9000");
+const client = new dsteem.Client(process.env.REACT_APP_BASE_API_URL);
+let opts = {};
+//connect to production server
+opts.addressPrefix = 'WTH';
+opts.chainId =
+    'd909c4dfab0369c4ae4f4acaf2229cc1e49b3bba0dffb36a37b6174a6f391e2e';
 export default function Signup() {
-  // const Client = new Dsteem.Client(process.env.REACT_APP_BASE_API_URL)
   const classes = useStyles();
   const [value, setValue] = useState("");
   const {
@@ -30,7 +34,69 @@ export default function Signup() {
     mode: "onChange",
     resolver: yupResolver(signupSchema),
   });
-  const onSubmit = (data) => {};
+  const onSubmit = (userInfo) => {
+    console.log('userInfo', userInfo)
+    const ownerKey = dsteem.PrivateKey.fromLogin(userInfo.username, userInfo.password, 'owner');
+    const activeKey = dsteem.PrivateKey.fromLogin(userInfo.username, userInfo.password, 'active');
+    const postingKey = dsteem.PrivateKey.fromLogin(
+      userInfo.username,
+      userInfo.password,
+        'posting'
+    );
+    const memoKey = dsteem.PrivateKey.fromLogin(
+      userInfo.username,
+      userInfo.password,
+        'memo'
+    ).createPublic(opts.addressPrefix);
+
+    const ownerAuth = {
+        weight_threshold: 1,
+        account_auths: [],
+        key_auths: [[ownerKey.createPublic(opts.addressPrefix), 1]],
+    };
+    const activeAuth = {
+        weight_threshold: 1,
+        account_auths: [],
+        key_auths: [[activeKey.createPublic(opts.addressPrefix), 1]],
+    };
+    const postingAuth = {
+        weight_threshold: 1,
+        account_auths: [],
+        key_auths: [[postingKey.createPublic(opts.addressPrefix), 1]],
+    };
+
+    const privateKey = dsteem.PrivateKey.fromString(
+      process.env.REACT_APP_KEY
+    );
+
+    const op = [
+        'account_create',
+        {
+            fee: '3.000 WORTH',
+            creator: process.env.REACT_APP_USER,
+            new_account_name: userInfo.username,
+            owner: ownerAuth,
+            active: activeAuth,
+            posting: postingAuth,
+            memo_key: memoKey,
+            json_metadata: '',
+        },
+    ];
+
+    client.broadcast.sendOperations([op], privateKey).then(
+        function(result) {
+            document.getElementById('result').style.display = 'block';
+            document.getElementById(
+                'result'
+            ).innerHTML = `<br/><p>Included in block: ${
+                result.block_num
+            }</p><br/><br/>`;
+        },
+        function(error) {
+            console.error(error);
+        }
+    );
+  };
 
   const handleDebounceFn = () => {
     client.database.call("get_accounts", [[watch("username")]]).then((res) => {
