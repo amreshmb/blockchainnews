@@ -84,7 +84,9 @@ function Header() {
             >
               Login
             </Button>
-            <Button color="inherit" onClick={() => {}}>
+            <Button color="inherit" onClick={() => {
+                history.push(ROUTES.SIGN);
+              }}>
               Sign Up
             </Button>
             <Box className={classes.pencilIcon} onClick={()=>{
