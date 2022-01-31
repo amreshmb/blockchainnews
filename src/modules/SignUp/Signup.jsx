@@ -13,6 +13,12 @@ import { signupSchema } from "./signup.validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import _debounce from "lodash/debounce";
+import { useHistory } from "react-router-dom";
+import { Dialog } from "@material-ui/core";
+import ROUTES from "../../common/routeConstants";
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 const dsteem = require("dsteem");
 const client = new dsteem.Client(process.env.REACT_APP_BASE_API_URL);
 let opts = {};
@@ -22,7 +28,15 @@ opts.chainId =
     'd909c4dfab0369c4ae4f4acaf2229cc1e49b3bba0dffb36a37b6174a6f391e2e';
 export default function Signup() {
   const classes = useStyles();
+  const history = useHistory();
   const [value, setValue] = useState("");
+  const [state, setState] = useState({
+    ownerKey: "",
+    activeKey: "",
+    postingKey: "",
+    memoKey: ""
+  })
+  const [open, setOpen] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -35,7 +49,6 @@ export default function Signup() {
     resolver: yupResolver(signupSchema),
   });
   const onSubmit = (userInfo) => {
-    console.log('userInfo', userInfo)
     const ownerKey = dsteem.PrivateKey.fromLogin(userInfo.username, userInfo.password, 'owner');
     const activeKey = dsteem.PrivateKey.fromLogin(userInfo.username, userInfo.password, 'active');
     const postingKey = dsteem.PrivateKey.fromLogin(
@@ -48,6 +61,7 @@ export default function Signup() {
       userInfo.password,
         'memo'
     ).createPublic(opts.addressPrefix);
+    
 
     const ownerAuth = {
         weight_threshold: 1,
@@ -82,15 +96,16 @@ export default function Signup() {
             json_metadata: '',
         },
     ];
-
     client.broadcast.sendOperations([op], privateKey).then(
         function(result) {
+            setOpen(true)
             document.getElementById('result').style.display = 'block';
             document.getElementById(
                 'result'
             ).innerHTML = `<br/><p>Included in block: ${
                 result.block_num
             }</p><br/><br/>`;
+            
         },
         function(error) {
             console.error(error);
@@ -98,6 +113,10 @@ export default function Signup() {
     );
   };
 
+  const handleClose = () => {
+    setOpen(false);
+    history.push(ROUTES.LANDING)
+  };
   const handleDebounceFn = () => {
     client.database.call("get_accounts", [[watch("username")]]).then((res) => {
       if (res.length === 0) {
@@ -230,6 +249,27 @@ export default function Signup() {
           </Grid>
         </form>
       </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+      >
+        <DialogTitle>
+          Please save all keys because you will not see these keys again!
+        </DialogTitle>
+        <DialogContent>
+          <ul>
+            <li>Owner key - {state.ownerKey}</li>
+            <li>Active key - {state.activeKey}</li>
+            <li>Posting key - {state.postingKey}</li>
+            <li>Memo key - {state.memoKey}</li>
+          </ul>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Go To News
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
